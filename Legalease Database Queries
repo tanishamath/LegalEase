@@ -1,0 +1,244 @@
+CREATE TABLE LAWYER (
+    lawyerid    VARCHAR2(5) PRIMARY KEY,
+    lawfirm     VARCHAR2(20),
+    lphone      VARCHAR2(12),
+    uemail      VARCHAR2(30), 
+    spec        VARCHAR2(20),
+    benefit     VARCHAR2(20)
+);
+
+-- Insert the sample entries again
+INSERT INTO LAWYER VALUES ('L01', 'JusticeCo', '9876543210', 'lisa@jc.com', 'Family Law', 'Orph A');
+INSERT INTO LAWYER VALUES ('L02', 'EquityLaw', '9123456789', 'tom@eq.org', 'Criminal', 'Char B');
+INSERT INTO LAWYER VALUES ('L03', 'RightsLLP', '9988776655', 'meera@rf.com', 'Civil Rights', 'Orph C');
+INSERT INTO LAWYER VALUES ('L04', 'NovaLaw', '9001122334', 'amir@nl.com', 'Corporate', 'Char D');
+INSERT INTO LAWYER VALUES ('L05', 'Veritas', '9012345678', 'anita@vl.in', 'Property', 'Orph E');
+
+
+
+
+
+
+
+
+
+
+
+-- Create CLIENT table
+CREATE TABLE CLIENT (
+    clientid    VARCHAR2(5) PRIMARY KEY,
+    uemail      VARCHAR2(30),
+    cphone      VARCHAR2(12),
+    lawyerid    VARCHAR2(5),
+    CONSTRAINT fk_lawyer
+        FOREIGN KEY (lawyerid)
+        REFERENCES LAWYER(lawyerid)
+);
+INSERT INTO CLIENT VALUES ('C01', 'alex@client.com', '9870001111', 'L01');
+INSERT INTO CLIENT VALUES ('C02', 'beth@client.org', '9870002222', 'L02');
+INSERT INTO CLIENT VALUES ('C03', 'carl@client.net', '9870003333', 'L01');
+INSERT INTO CLIENT VALUES ('C04', 'dina@client.in',  '9870004444', 'L03');
+INSERT INTO CLIENT VALUES ('C05', 'eli@client.xyz',  '9870005555', 'L05');
+
+CREATE TABLE JUDGE (
+    judgeid    VARCHAR2(5) PRIMARY KEY,
+    uemail     VARCHAR2(30)
+);
+INSERT INTO JUDGE VALUES ('J01', 'susan@court.gov');
+INSERT INTO JUDGE VALUES ('J02', 'harry@just.org');
+INSERT INTO JUDGE VALUES ('J03', 'nina@sup.in');
+INSERT INTO JUDGE VALUES ('J04', 'omar@court.in');
+INSERT INTO JUDGE VALUES ('J05', 'rita@law.org');
+
+
+
+
+CREATE TABLE CASES (
+    caseid       VARCHAR2(5),
+    clientid     VARCHAR2(5),
+    type         VARCHAR2(20),
+    status       VARCHAR2(15),
+    document     VARCHAR2(30),
+    filingdate   DATE,
+    PRIMARY KEY (caseid, clientid),
+    FOREIGN KEY (clientid) REFERENCES CLIENT(clientid)
+);
+
+INSERT INTO CASES VALUES ('CA01', 'C01', 'Criminal', 'Open', 'case1.pdf', TO_DATE('2024-05-10', 'YYYY-MM-DD'));
+INSERT INTO CASES VALUES ('CA02', 'C02', 'Civil', 'Closed', 'case2.pdf', TO_DATE('2023-11-20', 'YYYY-MM-DD'));
+INSERT INTO CASES VALUES ('CA03', 'C03', 'Property', 'Open', 'case3.pdf', TO_DATE('2025-01-05', 'YYYY-MM-DD'));
+INSERT INTO CASES VALUES ('CA04', 'C04', 'Family', 'Pending', 'case4.pdf', TO_DATE('2024-07-15', 'YYYY-MM-DD'));
+INSERT INTO CASES VALUES ('CA05', 'C05', 'Corporate', 'Closed', 'case5.pdf', TO_DATE('2023-09-18', 'YYYY-MM-DD'));
+
+
+
+
+
+
+
+CREATE TABLE SCHEDULE (
+    caseid       VARCHAR2(5),
+    clientid     VARCHAR2(5),
+    hearingdate  DATE,
+    time         VARCHAR2(10),
+    PRIMARY KEY (caseid, clientid),
+    FOREIGN KEY (caseid, clientid) REFERENCES CASES(caseid, clientid)
+);
+INSERT INTO SCHEDULE VALUES ('CA01', 'C01', TO_DATE('2025-05-10', 'YYYY-MM-DD'), '10:00 AM');
+INSERT INTO SCHEDULE VALUES ('CA02', 'C02', TO_DATE('2025-05-12', 'YYYY-MM-DD'), '11:00 AM');
+INSERT INTO SCHEDULE VALUES ('CA03', 'C03', TO_DATE('2025-05-15', 'YYYY-MM-DD'), '02:00 PM');
+INSERT INTO SCHEDULE VALUES ('CA04', 'C04', TO_DATE('2025-05-18', 'YYYY-MM-DD'), '09:30 AM');
+INSERT INTO SCHEDULE VALUES ('CA05', 'C05', TO_DATE('2025-05-20', 'YYYY-MM-DD'), '03:00 PM');
+
+CREATE TABLE FEEDBACK (
+    feedbackid   VARCHAR2(5) PRIMARY KEY,
+    rating       NUMBER(2,1),
+    feedbackdate DATE,
+    clientid     VARCHAR2(5),
+    description  VARCHAR2(30),
+    FOREIGN KEY (clientid) REFERENCES CLIENT(clientid)
+);
+
+
+
+INSERT INTO FEEDBACK VALUES ('F01', 8.5, TO_DATE('2024-05-01', 'YYYY-MM-DD'), 'C01', 'Very helpful service');
+INSERT INTO FEEDBACK VALUES ('F02', 9.0, TO_DATE('2024-05-03', 'YYYY-MM-DD'), 'C02', 'Quick resolution');
+INSERT INTO FEEDBACK VALUES ('F03', 7.5, TO_DATE('2024-04-28', 'YYYY-MM-DD'), 'C03', 'Satisfied overall');
+INSERT INTO FEEDBACK VALUES ('F04', 6.0, TO_DATE('2024-05-05', 'YYYY-MM-DD'), 'C04', 'Could be faster');
+INSERT INTO FEEDBACK VALUES ('F05', 9.5, TO_DATE('2024-05-07', 'YYYY-MM-DD'), 'C05', 'Great communication');
+
+ALTER TABLE LAWYER ADD CONSTRAINT uq_benefit UNIQUE (benefit);
+CREATE TABLE PAYMENT (
+    paymentid VARCHAR2(5) PRIMARY KEY,
+    amount NUMBER(10, 2),
+    paymode VARCHAR2(10),
+    benefit VARCHAR2(20),
+    clientid VARCHAR2(5),
+    CONSTRAINT fk_benefit FOREIGN KEY (benefit) REFERENCES LAWYER(benefit),
+    CONSTRAINT fk_client FOREIGN KEY (clientid) REFERENCES CLIENT(clientid)
+);
+INSERT INTO PAYMENT VALUES ('P01', 1000.00, 'Online', 'Orph A', 'C01');
+INSERT INTO PAYMENT VALUES ('P02', 1500.00, 'Cash',   'Char B', 'C02');
+INSERT INTO PAYMENT VALUES ('P03', 1200.00, 'UPI',    'Orph C', 'C04');
+INSERT INTO PAYMENT VALUES ('P04', 800.00,  'Card',   'Char D', 'C05');
+INSERT INTO PAYMENT VALUES ('P05', 950.00,  'Online', 'Orph E', 'C03');
+
+
+CREATE TABLE NAME (
+    uemail  VARCHAR2(30) PRIMARY KEY,
+    fname   VARCHAR2(20),
+    mname   VARCHAR2(20),
+    lname   VARCHAR2(20)
+);
+-- Lawyers
+INSERT INTO NAME VALUES ('lisa@jc.com', 'Lisa', 'Marie', 'Smith');
+INSERT INTO NAME VALUES ('tom@eq.org', 'Tom', NULL, 'Johnson');
+INSERT INTO NAME VALUES ('meera@rf.com', 'Meera', 'K.', 'Nair');
+INSERT INTO NAME VALUES ('amir@nl.com', 'Amir', NULL, 'Khan');
+INSERT INTO NAME VALUES ('anita@vl.in', 'Anita', NULL, 'Desai');
+
+-- Clients
+INSERT INTO NAME VALUES ('alex@client.com', 'Alex', NULL, 'Brown');
+INSERT INTO NAME VALUES ('beth@client.org', 'Beth', 'Anne', 'Green');
+INSERT INTO NAME VALUES ('carl@client.net', 'Carl', NULL, 'White');
+INSERT INTO NAME VALUES ('dina@client.in', 'Dina', NULL, 'Black');
+INSERT INTO NAME VALUES ('eli@client.xyz', 'Eli', 'James', 'Silver');
+
+-- Judges
+INSERT INTO NAME VALUES ('susan@court.gov', 'Susan', NULL, 'Perry');
+INSERT INTO NAME VALUES ('harry@just.org', 'Harry', 'T.', 'Stone');
+INSERT INTO NAME VALUES ('nina@sup.in', 'Nina', NULL, 'Ray');
+INSERT INTO NAME VALUES ('omar@court.in', 'Omar', NULL, 'Ali');
+INSERT INTO NAME VALUES ('rita@law.org', 'Rita', 'M.', 'Kapoor');
+
+
+CREATE TABLE CJUDGE (
+    caseid    VARCHAR2(5),
+    clientid  VARCHAR2(5),
+    judgeid   VARCHAR2(5),
+    PRIMARY KEY (caseid, clientid),
+    FOREIGN KEY (caseid, clientid) REFERENCES CASES(caseid, clientid),
+    FOREIGN KEY (judgeid) REFERENCES JUDGE(judgeid)
+);
+INSERT INTO CJUDGE VALUES ('CA01', 'C01', 'J01');
+INSERT INTO CJUDGE VALUES ('CA02', 'C02', 'J02');
+INSERT INTO CJUDGE VALUES ('CA03', 'C03', 'J03');
+INSERT INTO CJUDGE VALUES ('CA04', 'C04', 'J04');
+INSERT INTO CJUDGE VALUES ('CA05', 'C05', 'J05');
+
+INSERT INTO LCLIENT VALUES ('C01', 'L01');
+INSERT INTO LCLIENT VALUES ('C02', 'L02');
+INSERT INTO LCLIENT VALUES ('C03', 'L01');
+INSERT INTO LCLIENT VALUES ('C04', 'L03');
+INSERT INTO LCLIENT VALUES ('C05', 'L05');
+
+INSERT INTO LCLIENT VALUES ('C01', 'L01');
+INSERT INTO LCLIENT VALUES ('C02', 'L02');
+INSERT INTO LCLIENT VALUES ('C03', 'L01');
+INSERT INTO LCLIENT VALUES ('C04', 'L03');
+INSERT INTO LCLIENT VALUES ('C05', 'L05');
+
+
+INSERT INTO CLOCATION VALUES ('CRT01', '12 Justice Rd', 'Delhi');
+INSERT INTO CLOCATION VALUES ('CRT02', '45 Equity Ln', 'Mumbai');
+INSERT INTO CLOCATION VALUES ('CRT03', '78 Harmony St', 'Bangalore');
+
+INSERT INTO CLOCATION VALUES ('CRT01', 'Sector 5', 'Delhi');
+INSERT INTO CLOCATION VALUES ('CRT02', 'Main Street', 'Mumbai');
+INSERT INTO CLOCATION VALUES ('CRT03', 'Justice Lane', 'Bangalore');
+INSERT INTO CLOCATION VALUES ('CRT04', 'Court Avenue', 'Kolkata');
+INSERT INTO CLOCATION VALUES ('CRT05', 'Law Road', 'Chennai');
+
+INSERT INTO COURT VALUES ('CRT01', 'Civil', 'Chamber A');
+INSERT INTO COURT VALUES ('CRT02', 'Criminal', 'Chamber B');
+INSERT INTO COURT VALUES ('CRT03', 'Family', 'Chamber C');
+
+INSERT INTO COURT VALUES ('CRT01', 'Criminal', 'Chamber A');
+INSERT INTO COURT VALUES ('CRT02', 'Civil', 'Chamber B');
+INSERT INTO COURT VALUES ('CRT03', 'Property', 'Chamber C');
+INSERT INTO COURT VALUES ('CRT04', 'Family', 'Chamber D');
+INSERT INTO COURT VALUES ('CRT05', 'Corporate', 'Chamber E');
+
+
+
+
+
+
+
+
+
+TRIGGER
+
+SQL> CREATE OR REPLACE TRIGGER update_feedback_timestamp
+  2  BEFORE UPDATE ON FEEDBACK
+  3  FOR EACH ROW
+  4  BEGIN
+  5    :NEW.feedbackdate := SYSDATE;
+  6  END;
+  7  /
+
+
+
+SQL> UPDATE FEEDBACK SET description = 'Very helpful service - updated' WHERE feedbackid = 'F01';
+
+1 row updated.
+
+SQL> select * from feedback;
+SQL> SELECT feedbackid, feedbackdate, description FROM FEEDBACK;
+
+FEEDB FEEDBACKD DESCRIPTION
+----- --------- ------------------------------
+F01   25-APR-25 Very helpful service - updated
+F02   03-MAY-24 Quick resolution
+F03   28-APR-24 Satisfied overall
+F04   05-MAY-24 Could be faster
+F05   07-MAY-24 Great communication
+F06   24-APR-25 he was nice
+F07   24-APR-25 excellent
+F08   24-APR-25 wow
+F09   24-APR-25 trigg
+F10   24-APR-25 again checking trigger
+
+10 rows selected.
+
+SQL> commit;
