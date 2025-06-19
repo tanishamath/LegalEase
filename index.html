@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalEase</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Italiana&family=Lora:ital,wght@0,400..700;1,400..700&family=Major+Mono+Display&family=Sirin+Stencil&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="images/compliant.png" alt="LegalEase Logo" width="50" height="50" class="me-2">
+            <span>LegalEase</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#About">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Cases">Lawyers</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Newsletter">Newsletter</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Constitution">Constituition</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Rights">Rights</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#Services">Contact Us</a></li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-warning" href="login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-warning" href="register.html">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<hr class="bg-warning mt-0" style="height: 4px; border: none;">
+
+
+<div class="bg-image-container">
+    <div class="overlay">
+        <h2 id="typing-text"></h2> 
+        <p>Your trusted legal companion</p>
+    </div>
+</div>
+
+<div id="About" class="container  mt-5">
+    <h1>About Us</h1>
+    <p class="lead">
+        Welcome to <b>LegalEase</b>, your one-stop platform for everything legal! Stay informed with the latest law updates, 
+        explore landmark cases, and gain insights into the legal world. Clients can effortlessly track their cases, while 
+        lawyers and judges can efficiently manage their schedules—all in one place. Whether you're seeking knowledge or 
+        managing legal matters, we keep you connected to justice with ease and convenience!
+    </p>
+</div>
+
+<div id="Cases" class="container mt-5">
+    <h2>Lawyers</h2>
+    <p>Get the details of lawyers by specialization to connect with them</p>
+    <div class="container mt-5">
+        <h2>Search by Specialisation</h2>
+    
+        <select id="specializationDropdown" class="form-select">
+            <option value="">Select Specialization</option>
+            <option value="criminal">Criminal</option>
+            <option value="civil">Civil</option>
+            <option value="corporate">Corporate</option>
+        </select>
+        
+        <div id="lawyerTableContainer"></div>
+        
+       
+        
+    
+        
+    
+        <div class="mt-3" id="result"></div>
+    </div>
+</div>
+<div id="Newsletter" class="container-fluid mt-5 newsletter-section">
+    <div class="overlay-content">
+        <h2>Newsletter</h2>
+        <div id="Articles" class="container mt-4">
+            <div class="row">
+                <!-- Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Legal Reforms 2025</h5>
+                            <p class="card-text">Recent legal amendments affecting civil rights...</p>
+                            <button class="btn btn-outline-secondary expand-btn" data-bs-toggle="collapse" data-bs-target="#article1">Expand</button>
+                            <div class="collapse mt-2" id="article1">
+                                <p>Governments are introducing legal reforms to improve transparency and justice, impacting various laws...</p>
+                                <a href="https://www.barandbench.com/columns/landmark-reforms-proposed-to-modernize-legal-practice-in-india-understanding-the-advocates-amendment-bill-2025" class="btn btn-outline-warning">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Landmark Cases in 2024</h5>
+                            <p class="card-text">A look at the most influential court rulings this year...</p>
+                            <button class="btn btn-outline-secondary expand-btn" data-bs-toggle="collapse" data-bs-target="#article2">Expand</button>
+                            <div class="collapse mt-2" id="article2">
+                                <p>Major court decisions have reshaped laws in corporate governance and civil rights, setting new precedents...</p>
+                                <a href="https://www.scobserver.in/journal/supreme-court-review-top-10-judgements-of-2024/" class="btn btn-outline-warning">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">AI & The Law</h5>
+                            <p class="card-text">How artificial intelligence is influencing legal decisions...</p>
+                            <button class="btn btn-outline-secondary expand-btn" data-bs-toggle="collapse" data-bs-target="#article3">Expand</button>
+                            <div class="collapse mt-2" id="article3">
+                                <p>AI is being used in legal research and case predictions, but concerns over bias in automated decisions remain...</p>
+                                <a href="https://www.india-briefing.com/news/india-regulation-of-ai-and-large-language-models-31680.html/" class="btn btn-outline-warning">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Cybersecurity Laws</h5>
+                            <p class="card-text">Understanding new regulations for digital privacy...</p>
+                            <button class="btn btn-outline-secondary expand-btn" data-bs-toggle="collapse" data-bs-target="#article4">Expand</button>
+                            <div class="collapse mt-2" id="article4">
+                                <p>With rising cyber threats, new laws focus on user data protection, corporate transparency, and online rights...</p>
+                                <a href="https://criai.org/page.php?page=cyber-law-in-india-" class="btn btn-outline-warning">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Environmental Litigation</h5>
+                            <p class="card-text">Recent lawsuits pushing for climate justice...</p>
+                            <button class="btn btn-outline-secondary expand-btn" data-bs-toggle="collapse" data-bs-target="#article5">Expand</button>
+                            <div class="collapse mt-2" id="article5">
+                                <p>Activists are suing corporations over environmental negligence, leading to tougher regulations and legal battles...</p>
+                                <a href="https://cms-lawnow.com/en/ealerts/1999/11/environment-law-in-india-an-overview" class="btn btn-outline-warning">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Human Rights in 2025</h5>
+                            <p class="card-text">How global policies are shifting towards inclusivity...</p>
+                            <button class="btn btn-outline-secondary expand-btn" data-bs-toggle="collapse" data-bs-target="#article6">Expand</button>
+                            <div class="collapse mt-2" id="article6">
+                                <p>New policies worldwide are addressing gender equality, refugee rights, and fair labor laws, creating global impact...</p>
+                                <a href="https://www.ohchr.org/en/publications/annual-appeal/un-human-rights-appeal-2025" class="btn btn-outline-warning">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End of row -->
+        </div>
+    </div>
+</div>
+
+<div id="Constitution" class="container mt-5">
+    
+    <h1>The Indian Constituition</h1>
+    <p class="lead">
+        The Indian Constitution is the supreme law of India, which lays down the framework for the country’s political system, government, and fundamental rights of citizens. It was adopted on 26th November 1949 and came into effect on 26th January 1950, which is celebrated as Republic Day.
+        
+    </p>
+    <p class="lead">
+        It is the longest written constitution in the world, containing 448 articles divided into 25 parts and 12 schedules. It establishes India as a sovereign, socialist, secular, and democratic republic while ensuring justice, liberty, equality, and fraternity for all citizens.
+        
+    </p>
+    <p class="lead">
+        The Constitution provides a parliamentary system of government, where the President is the head of state, and the Prime Minister is the head of government. It also defines the structure of the legislature, executive, and judiciary and distributes powers between the central and state governments through federal principles.
+        
+    </p>
+    <p class="lead">
+        One of its most important features is the Fundamental Rights (Part III), which guarantees essential freedoms to citizens. It also includes Directive Principles of State Policy (Part IV), guiding the government in making policies for social and economic welfare. The Fundamental Duties (added by the 42nd Amendment in 1976) remind citizens of their responsibilities toward the nation.
+        
+    </p>
+    <p class="lead">
+        The Indian Constitution is a living document, meaning it can be amended when necessary. Since 1950, it has been amended several times to adapt to changing needs, with the First Amendment (1951) and the 73rd and 74th Amendments (1992) being some of the most significant changes.
+        
+    </p>
+    <p class="lead">
+        Drafted under the leadership of Dr. B.R. Ambedkar, the Constitution is a symbol of India’s unity, diversity, and commitment to democracy. It ensures that the country functions smoothly while protecting the rights and freedoms of its people.
+        
+    </p>
+    <p class="lead">
+        
+        
+    </p>
+    
+</div>
+<div class="rights-overlay">
+    <div id="Rights" class="container mt-5 text-white">
+        <h2 class="text-center">Fundamental Rights</h2>
+        <p class="lead">
+            The Indian Constitution provides every citizen with certain essential rights to ensure freedom, equality, and justice. These are known as Fundamental Rights and protect individuals from unfair treatment by the government or society.
+        </p>
+        <p class="lead">
+            <b>The Right to Equality</b> ensures that all citizens are treated equally before the law...
+        </p>
+        <p class="lead">
+            <b>The Right to Freedom</b> allows individuals to express their opinions freely, move and live anywhere in India, and choose their profession. People have the right to form groups or associations and peacefully protest. It also protects citizens from unfair punishments and arrests. Additionally, children between the ages of 6 and 14 have the right to free and compulsory education.
+            
+        </p>
+        <p class="lead">
+            <b>The Right Against Exploitation</b> protects individuals from forced labor and human trafficking. No one can be forced to work against their will, and children under 14 cannot be employed in hazardous jobs such as factories or mines. This right ensures that every person is treated with dignity and fairness.
+            
+        </p>
+        <p class="lead">
+            <b>The Right to Freedom of Religion</b> allows every citizen to follow, practice, and spread their religion freely. Religious places and organizations have the right to manage their own affairs without government interference. No person can be forced to pay taxes for religious activities, and government-run schools cannot impose religious teachings on students.
+            
+        </p>
+        <p class="lead">
+            <b>The Cultural and Educational Rights</b> protect the identity and heritage of different communities in India. Every group has the right to preserve its language, culture, and traditions. Minority communities can establish and run their own educational institutions to promote their culture and values.
+            
+        </p>
+        <p class="lead">
+            <b>The Right to Constitutional Remedies</b> is considered the most important right, as it allows individuals to approach the Supreme Court or High Courts if any of their fundamental rights are violated. The courts have the power to issue special orders, known as writs, to protect these rights and ensure justice is served.
+            
+        </p>
+        <p class="lead">
+            These fundamental rights are essential for maintaining democracy and ensuring that every citizen enjoys freedom, dignity, and equality in society.
+            
+        </p>
+        <!-- Add the rest of your content here -->
+    </div>
+</div>
+
+<div id="Services" class="container  mt-5">
+    <h1>Services</h1>
+    <p class="lead">
+        Our Law Management System is dedicated to enhancing legal accessibility and efficiency by connecting clients, lawyers, and judges on a unified platform. With secure case management, seamless communication, and streamlined legal processes, we aim to make justice more transparent and accessible to all.
+    </p>
+</div>
+
+
+<div class="container align-items-  mt-4">
+    <p class="text-warning ">
+        Existing user? 
+        <a href="login.html" class="btn btn-outline-warning">Login Now!</a> <span></span>Are you a Client, Lawyer, or Judge?  
+        <a href="register.html" class="btn btn-outline-warning">Create Account!</a>
+    </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            
+            <!-- Quick Links -->
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#About" class="text-light">About Us</a></li>
+                    <li><a href="#Cases" class="text-light">Cases</a></li>
+                    <li><a href="#Newsletter" class="text-light">Newsletter</a></li>
+                    <li><a href="#Services" class="text-light">Services</a></li>
+                    <li><a href="#Contact" class="text-light">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Follow Us (Updated for Proper Display) -->
+            <div class="col-md-4 text-center">
+                <h5>Follow Us</h5>
+                <a href="https://www.facebook.com/" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="https://twitter.com/" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.instagram.com/" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/" class="text-white"><i class="bi bi-linkedin"></i></a>
+            </div>
+
+            <!-- Contact Us Section -->
+            <div class="col-md-4 text-end">
+                <h5>Contact Us</h5>
+                <p>Email: support@legalease.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Legal Street, Justice City</p>
+            </div>
+        </div>
+
+        <hr class="bg-light">
+
+        <!-- Copyright -->
+        <div class="text-center">
+            <p class="mb-0">&copy; 2025 LegalEase. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://kit.fontawesome.com/YOUR_FA_KIT.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
